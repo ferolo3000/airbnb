@@ -48,6 +48,12 @@ class Home extends React.Component {
     const { properties, next_page, loading } = this.state;
     return (
       <Layout>
+        <div className="user-btn-group">
+          <div className="btn-group" role="group" aria-label="Basic example">
+            <button type="button" className="btn user-btn" id="btn-property">My Properties</button>
+            <button type="button" className="btn user-btn" id="btn-booking">My Bookings</button>
+          </div>
+        </div>
         <div className="container pt-4">
           <h4 className="mb-1">Top-rated places to stay</h4>
           <p className="text-secondary mb-3">Explore some of the best-reviewed stays in the world</p>
