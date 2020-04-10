@@ -24,6 +24,10 @@ module Api
       render 'api/bookings/index'
     end
 
+    def is_paid?
+      self.charges.pluck(:complete).include?(true)
+    end
+
     private
 
     def booking_params
