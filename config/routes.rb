@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
 
-  get '/property/:id' => 'static_pages#property'
-  get '/login' => 'static_pages#login'
+  get '/property/:id'     => 'static_pages#property'
+  get '/login'            => 'static_pages#login'
+  get '/user'             => 'static_pages#user'
 
   namespace :api do
     # Add routes below this line
@@ -12,8 +13,12 @@ Rails.application.routes.draw do
     resources :bookings, only: [:create]
     resources :charges, only: [:create]
 
-    get '/properties/:id/bookings' => 'bookings#get_property_bookings'
-    get '/authenticated' => 'sessions#authenticated'
+    get '/properties/:id/bookings'        => 'bookings#get_property_bookings'
+    get '/authenticated'                  => 'sessions#authenticated'
+    get '/users/:username/properties'     => 'properties#index_by_user'
+    get  '/properties'                    => 'properties#index'
+
+    post '/properties'                    => 'properties#create'
 
     # stripe webhook
     post '/charges/mark_complete' => 'charges#mark_complete'
