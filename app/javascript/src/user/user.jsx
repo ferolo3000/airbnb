@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 import { handleErrors } from '@utils/fetchHelper';
 import PropertyUser from "./propertyUser";
+import BookingUser from "./bookingUser";
+import Form from "./form";
+import Standard from "./standard"
 
 import "./user.scss"
 
@@ -14,8 +17,10 @@ class User extends React.Component {
     this.state = {
       current_user: '',
       showComponent: false,
+      renderComponent:'',
     }
     this._onButtonClick = this._onButtonClick.bind(this);
+    this.selectComponent = this.selectComponent.bind(this);
   }
 
   componentDidMount = () => {
@@ -30,8 +35,26 @@ class User extends React.Component {
    });
  }
 
+ selectComponent(event){
+   event.preventDefault();
+   this.setState({renderComponent: event.target.name});
+}
+
   render() {
-    console.log(this.state.current_user)
+    console.log(this.state.renderComponent)
+    let toRender = null;
+      switch(this.state.renderComponent)
+      {
+        case "propertyUser":
+        toRender = <PropertyUser />
+        case "bookingUser":
+        toRender = <BookingUser />
+        case "form":
+        toRender = <Form />
+        default:
+        toRender = <Standard />
+      }
+
     return (
       <Layout>
       <div className="container">
@@ -47,12 +70,12 @@ class User extends React.Component {
           <h5 className="text-white font-weight-bold text-uppercase px-3 pb-2 mb-0">Main</h5>
           <ul className="nav flex-column mb-0">
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="propertyUser" onClick={this.selectComponent}>
                 Properties
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link"onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="bookingUser" onClick={this.selectComponent}>
                 Bookings
               </a>
             </li>
@@ -88,10 +111,7 @@ class User extends React.Component {
         </div>
       </div>
       <div className="page-content p-5" id="content">
-      {this.state.showComponent ?
-           <PropertyUser /> :
-           null
-        }
+      {toRender}
       </div>
     </Layout>
     )

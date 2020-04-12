@@ -19,7 +19,8 @@ class Form extends React.Component {
       bedrooms: '',
       beds: '',
       baths: '',
-      current_user: ''
+      current_user: '',
+      image_url:''
     }
     this.createProperty = this.createTweets.bind(this);
     this.handleChange = this.handleChange.bind(this);
