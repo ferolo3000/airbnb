@@ -24,6 +24,12 @@ module Api
       render 'api/bookings/index'
     end
 
+    def index_by_user
+      @trips = Booking.joins(:property).select(:title, :start_date, :end_date, :id, :description, :image_url, :property_id)
+       charge = Charge.all
+       render json: { trips: charge }
+    end
+
     def is_paid?
       self.charges.pluck(:complete).include?(true)
     end

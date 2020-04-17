@@ -10,6 +10,7 @@ class Property extends React.Component {
   state = {
     property: {},
     loading: true,
+    current_user:''
   }
 
   componentDidMount() {
@@ -21,6 +22,23 @@ class Property extends React.Component {
           loading: false,
         })
       })
+      this.currentUser();
+  }
+
+  currentUser = () => {
+    fetch('/api/authenticated')
+      .then(response => response.json())
+      .then(data => this.setState({ current_user: data.username }));
+  }
+
+  handleLogout() {
+    fetch('/api/sessions', safeCredentials({
+      method: 'DELETE',
+    }))
+    .then(response => {
+      window.location = "/login";
+    })
+    .catch(error => console.log(error))
   }
 
   render () {
@@ -46,7 +64,23 @@ class Property extends React.Component {
     } = property
 
     return (
-      <Layout>
+      <React.Fragment>
+        <nav className="navbar navbar-expand sticky-top navbar-light bg-light">
+          <a href="/"><span className="navbar-brand mb-0 h1 text-danger">Airbnb</span></a>
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link" href="/">Home</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href={`/users/${this.state.current_user}`}>User</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/login" onClick={this.handleLogout}>Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
         <div className="property-image mb-3" style={{ backgroundImage: `url(${image_url})` }} />
         <div className="container">
           <div className="row">
@@ -73,7 +107,7 @@ class Property extends React.Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </React.Fragment>
     )
   }
 }

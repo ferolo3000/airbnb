@@ -28,8 +28,8 @@
 }
 
 .text-link:hover {
-  background-color: #767676;
-  color: #fff;
+  background-color: #fff;
+  color: #FF5A5F;
   font-style: italic;
 }
 
@@ -38,13 +38,30 @@
 }
 
 .text-link:active {
-  background-color: #767676;
-  color: #fff;
+  background-color: #fff;
+  color: #FF5A5F;
   font-style: italic;
 }
 
 .text-link:focus {
-  background-color: #767676;
-  color: #fff;
+  background-color: #fff;
+  color: #FF5A5F;
   font-style: italic;
+}
+
+
+// form
+
+.label-form {
+  font-size: 14px;
+  color: #767676;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+input.form-control::placeholder {
+  font-style: italic;
+  font-size: 12px;
 }

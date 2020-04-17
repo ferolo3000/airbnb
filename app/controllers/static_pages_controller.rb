@@ -15,4 +15,9 @@ class StaticPagesController < ApplicationController
   def user
     render 'user'
   end
+
+  def success
+    @data = { property_id: params[:id] }.to_json
+    render 'success'
+  end
 end

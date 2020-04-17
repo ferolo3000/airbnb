@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
-import { handleErrors } from '@utils/fetchHelper';
+import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import PropertyUser from "./propertyUser";
 import BookingUser from "./bookingUser";
 import Form from "./form";
@@ -20,10 +20,9 @@ class User extends React.Component {
       renderComponent:'',
     }
     this._onButtonClick = this._onButtonClick.bind(this);
-    this.selectComponent = this.selectComponent.bind(this);
   }
 
-  componentDidMount = () => {
+  componentDidMount()   {
     fetch('/api/authenticated')
       .then(response => response.json())
       .then(data => this.setState({ current_user: data.username }));
@@ -35,48 +34,57 @@ class User extends React.Component {
    });
  }
 
- selectComponent(event){
-   event.preventDefault();
-   this.setState({renderComponent: event.target.name});
-}
+ handleLogout() {
+   fetch('/api/sessions', safeCredentials({
+     method: 'DELETE',
+   }))
+   .then(response => {
+     window.location = "/login";
+   })
+   .catch(error => console.log(error))
+ }
 
   render() {
-    console.log(this.state.renderComponent)
-    let toRender = null;
-      switch(this.state.renderComponent)
-      {
-        case "propertyUser":
-        toRender = <PropertyUser />
-        case "bookingUser":
-        toRender = <BookingUser />
-        case "form":
-        toRender = <Form />
-        default:
-        toRender = <Standard />
-      }
+    console.log(this.state.current_user)
 
     return (
-      <Layout>
+      <React.Fragment>
+      <nav className="navbar navbar-expand sticky-top navbar-light bg-light">
+        <a href="/"><span className="navbar-brand mb-0 h1 text-danger">Airbnb</span></a>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link" href="/">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href={`/users/${this.state.current_user}`}>User</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/login" onClick={this.handleLogout}>Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <div className="container">
         <div className="vertical-nav" id="sidebar">
           <div className="py-4 px-3 mb-4 bg-light">
             <div className="media d-flex align-items-center">
               <img src="https://img.icons8.com/ultraviolet/80/000000/user.png" width="65" className="mr-3 rounded-circle img-thumbnail shadow-sm" />
               <div className="media-body">
-                <h4>{this.state.current_user}</h4>
+                <h5>Hello {this.state.current_user}</h5>
               </div>
             </div>
           </div>
           <h5 className="text-white font-weight-bold text-uppercase px-3 pb-2 mb-0">Main</h5>
           <ul className="nav flex-column mb-0">
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" name="propertyUser" onClick={this.selectComponent}>
-                Properties
+              <a href="#" className="nav-link text-link" name="form" onClick={this._onButtonClick}>
+                Bookings
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" name="bookingUser" onClick={this.selectComponent}>
-                Bookings
+              <a href="#" className="nav-link text-link"onClick={this._onButtonClick}>
+                Properties
               </a>
             </li>
             <li className="nav-item">
@@ -110,10 +118,13 @@ class User extends React.Component {
             </ul>
         </div>
       </div>
-      <div className="page-content p-5" id="content">
-      {toRender}
+      <div className="page-content p-3" id="content">
+      {this.state.showComponent ?
+           <PropertyUser /> :
+          <BookingUser/>
+        }
       </div>
-    </Layout>
+    </React.Fragment>
     )
   }
 

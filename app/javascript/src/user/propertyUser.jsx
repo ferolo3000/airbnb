@@ -1,10 +1,6 @@
 // PropertyUser.jsx
 import React from 'react';
-import Form from './form';
-import Layout from '@src/layout';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
-
-
 
 class PropertyUser extends React.Component {
   constructor(props) {
@@ -12,20 +8,14 @@ class PropertyUser extends React.Component {
     this.state = {
       current_user: '',
       userProperties: [],
-      show_form: true,
     }
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange = (e) => {
-    this.setState({ message: e.target.value });
   }
 
   componentDidMount() {
-    fetch(`/api/properties?page=1`)
+    this.currentUser();
+    fetch(`/api/users/${this.state.current_user}/properties`)
       .then(response => response.json())
       .then(data => this.setState({ userProperties: data.properties }));
-    this.currentUser();
   }
 
   currentUser = () => {
@@ -34,13 +24,26 @@ class PropertyUser extends React.Component {
       .then(data => this.setState({ current_user: data.username }));
   }
 
-  toggle = () => {
+  getProperty = (data) => {
     this.setState({
-      show_form: !this.state.show_form,
+      userProperties: data.properties
     })
   }
 
+  handleEdit = (e) => {
+    e.preventDefault()
+    let id = e.target.parentNode.id
+
+    fetch(`/api/properties/${id}/edit`)
+      .then(handleErrors)
+      .then(data => {
+        this.getProperty(data);
+      })
+  }
+
   render() {
+
+  if (this.state.userProperties.length > 0) {
     return (
       <React.Fragment>
       <div>
@@ -56,7 +59,7 @@ class PropertyUser extends React.Component {
                 <p className="mb-0">Booked by: </p>
                 <p className="mb-0">Dates Booked: </p>
                 <p className="mb-0">Booking Status: </p>
-              <button className="btn btn-sm btn-success mt-1">Edit</button>
+              <button className="btn btn-sm btn-success mt-1" onClick={this.handleEdit}>Edit</button>
             </div>
             )
           })}
@@ -64,6 +67,14 @@ class PropertyUser extends React.Component {
       </div>
       </React.Fragment>
     )
+  }
+
+  return (
+      <React.Fragment>
+        <p className="text-center">Sorry {this.state.current_user}, you don't have any property</p>
+      </React.Fragment>
+    )
+
   }
 
 }

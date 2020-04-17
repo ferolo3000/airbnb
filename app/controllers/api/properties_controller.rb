@@ -18,9 +18,18 @@ module Api
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)
       user = session.user
-      @property = user.property.new(property_params)
+      property = user.properties.new(property_params)
+      if property.save
+        render 'api/properties/create', status: :ok
+      else
+        render json: { success: false }, status: :bad_request
+      end
+    end
 
-      render 'api/properties/create'
+    def edit
+      @property = Property.find_by(id: params[:id])
+      return render json: { error: 'not_found' }, status: :not_found if !@property
+      render 'api/properties/edit', status: :ok
     end
 
     def index_by_user
@@ -36,7 +45,7 @@ module Api
 
      def property_params
        params.require(:property).permit(:title, :description, :city, :country, :property_type, :price_per_night, :max_guests,
-          :bedrooms, :beds, :baths, :image_url)
+          :bedrooms, :beds, :baths)
      end
   end
 end
