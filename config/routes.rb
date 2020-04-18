@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get '/login'                      => 'static_pages#login'
   get '/users/:username'            => 'static_pages#user'
   get '/booking/:id/success'        => 'static_pages#success'
-  get '/users/:username'            => 'static_pages#user'
 
   namespace :api do
     # Add routes below this line
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
 
     get '/properties/:id/bookings'        => 'bookings#get_property_bookings'
     get '/authenticated'                  => 'sessions#authenticated'
-    get '/users/:username/properties'     => 'properties#show'
+    get '/users/:user_id/properties'     => 'properties#index_by_user'
     get '/users/:username/bookings'       => 'bookings#index_by_user'
     get '/properties'                     => 'properties#index'
 

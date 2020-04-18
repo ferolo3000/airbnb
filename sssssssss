@@ -1,0 +1,42 @@
+=> [[32m#<User:0x00007f52e489f8a8[0m
+  id: [1;34m1[0m,
+  username: [31m[1;31m"[0m[31mTommy[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mtommy@test.com[1;31m"[0m[31m[0m,
+  password: [31m[1;31m"[0m[31m$2a$12$Y7Om2nKl9PhPkkJdtRGuu.Nmx7I0h4FHlgf8Fs1G9YXuYWGSYYKEe[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m04[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m04[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+ [32m#<User:0x00007f52e489c478[0m
+  id: [1;34m2[0m,
+  username: [31m[1;31m"[0m[31mBobby[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mbobby@test.com[1;31m"[0m[31m[0m,
+  password: [31m[1;31m"[0m[31m$2a$12$yb5FbhxfTQI2deTSR3ZCc.9HNq0SiVg6Cnp46NxMduF1mTql6ylNK[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m04[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m04[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+ [32m#<User:0x00007f52e48a7e18[0m
+  id: [1;34m3[0m,
+  username: [31m[1;31m"[0m[31mSarah[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31msarah@test.com[1;31m"[0m[31m[0m,
+  password: [31m[1;31m"[0m[31m$2a$12$7watJFgU8tBhjubnkOQdquoudxxoRdzXR3cGQJgdU9MR1TXRQCnR6[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m04[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m04[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+ [32m#<User:0x00007f52e48a7cd8[0m
+  id: [1;34m4[0m,
+  username: [31m[1;31m"[0m[31mLilly[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mlilly@test.com[1;31m"[0m[31m[0m,
+  password: [31m[1;31m"[0m[31m$2a$12$/dNfLUqbPPDCdPAHAQmI3ep8uI4869u6zSqLoKsBNQaT9vLhMG7Se[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+ [32m#<User:0x00007f52e48a7ad0[0m
+  id: [1;34m5[0m,
+  username: [31m[1;31m"[0m[31mJimmy[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mjimmy@test.com[1;31m"[0m[31m[0m,
+  password: [31m[1;31m"[0m[31m$2a$12$VaxRsgj4/CJUe2q0Hq81yuwj6n3kGnb9rYcYWjVL/zd0CNY7rsl7e[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+ [32m#<User:0x00007f52e48a78c8[0m
+  id: [1;34m6[0m,
+  username: [31m[1;31m"[0m[31mCammy[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mcammy@test.com[1;31m"[0m[31m[0m,
+  password: [31m[1;31m"[0m[31m$2a$12$s30gzO4KeRfyLp3TxCWsZO8l2yW.iH98BfKpM3zDqxesjOy9M5vzS[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m02[0m [1;34;4mApr[0m [1;34m2020[0m [1;34m16[0m:[1;34m56[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m]

@@ -15,6 +15,7 @@ class PropertyUser extends React.Component {
     fetch(`/api/users/${this.props.username_id}/properties`)
       .then(response => response.json())
       .then(data => this.setState({ userProperties: data.properties }));
+      this.currentUser();
   }
 
   currentUser = () => {
@@ -29,19 +30,19 @@ class PropertyUser extends React.Component {
     })
   }
 
-  handleEdit = (e) => {
-    e.preventDefault()
-    let id = e.target.parentNode.id
-
-    fetch(`/api/properties/${id}/edit`)
-      .then(handleErrors)
-      .then(data => {
-        this.getProperty(data);
-      })
-  }
+  // handleEdit = (e) => {
+  //   e.preventDefault()
+  //   let id = e.target.parentNode.id
+  //
+  //   fetch(`/api/properties/${id}/edit`)
+  //     .then(handleErrors)
+  //     .then(data => {
+  //       this.getProperty(data);
+  //     })
+  // }
 
   render() {
-
+    console.log(this.props.username_id)
   if (this.state.userProperties.length > 0) {
     return (
       <React.Fragment>

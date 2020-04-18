@@ -28,7 +28,7 @@ module Api
 
     def update
       @property = Property.find_by(id: params[:id])
-      if property.update_attributes(property_params)
+      if property.update(property_params)
         render json: { success: true }, status: :ok
       else
         render json: { success: false }, status: :bad_request
@@ -56,12 +56,9 @@ module Api
     end
 
     def index_by_user
-      user = User.find_by(username: params[:username])
-
-      if user
-        @properties = user.properties
-        render 'api/properties/index'
-      end
+       @user_properties = Property.where(user_id: params[:user_id])
+       return render json: { error: 'not_found' }, status: :not_found if !@user_properties
+       render 'api/properties/user_properties', status: :ok
     end
 
     private
