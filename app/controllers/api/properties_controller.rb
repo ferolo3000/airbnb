@@ -26,10 +26,33 @@ module Api
       end
     end
 
-    def edit
+    def update
       @property = Property.find_by(id: params[:id])
-      return render json: { error: 'not_found' }, status: :not_found if !@property
-      render 'api/properties/edit', status: :ok
+      if property.update_attributes(property_params)
+        render json: { success: true }, status: :ok
+      else
+        render json: { success: false }, status: :bad_request
+      end
+    end
+
+    def destroy
+      token = cookies.signed[:airbnb_session_token]
+      session = Session.find_by(token: token)
+
+      return render json: { success: false } unless session
+
+      user = session.user
+      property = Property.find_by(id: params[:id])
+
+      if property and property.user == user and property.destroy
+        render json: {
+          success: true
+        }
+      else
+        render json: {
+          success: false
+        }
+      end
     end
 
     def index_by_user

@@ -16,10 +16,8 @@ class User extends React.Component {
     super(props)
     this.state = {
       current_user: '',
-      showComponent: false,
-      renderComponent:'',
+      render:''
     }
-    this._onButtonClick = this._onButtonClick.bind(this);
   }
 
   componentDidMount()   {
@@ -28,11 +26,19 @@ class User extends React.Component {
       .then(data => this.setState({ current_user: data.username }));
   }
 
-  _onButtonClick() {
-   this.setState({
-     showComponent: true,
-   });
- }
+  handleClick(compName, e){
+        console.log(compName);
+        this.setState({render:compName});
+      }
+  _renderSubComp(){
+      switch(this.state.render){
+        case 'bookings': return <BookingUser/>
+        case 'properties' : return <PropertyUser/>
+        case 'add_property': return <Form/>
+        case 'payments': return <Standard/>
+        case 'standard': return <Standard/>
+      }
+  }
 
  handleLogout() {
    fetch('/api/sessions', safeCredentials({
@@ -78,22 +84,22 @@ class User extends React.Component {
           <h5 className="text-white font-weight-bold text-uppercase px-3 pb-2 mb-0">Main</h5>
           <ul className="nav flex-column mb-0">
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" name="form" onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="bookings" onClick={this.handleClick.bind(this, 'bookings')}>
                 Bookings
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link"onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="properties" onClick={this.handleClick.bind(this, 'properties')}>
                 Properties
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link"onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="add_property" onClick={this.handleClick.bind(this, 'add_property')}>
                 Add Property
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link"onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="payments" onClick={this.handleClick.bind(this, 'payments')}>
                 Payments
               </a>
             </li>
@@ -101,17 +107,17 @@ class User extends React.Component {
           <h5 className="text-white font-weight-bold text-uppercase px-3 pb-2 mt-2">Settings</h5>
           <ul className="nav flex-column mb-0">
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="standard" onClick={this.handleClick.bind(this, 'standard')}>
                 Global Preferences
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="standard" onClick={this.handleClick.bind(this, 'standard')}>
                 Notifications
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" onClick={this._onButtonClick}>
+              <a href="#" className="nav-link text-link" name="standard" onClick={this.handleClick.bind(this, 'standard')}>
                 Login & Security
               </a>
             </li>
@@ -119,10 +125,7 @@ class User extends React.Component {
         </div>
       </div>
       <div className="page-content p-3" id="content">
-      {this.state.showComponent ?
-           <PropertyUser /> :
-          <BookingUser/>
-        }
+      {this._renderSubComp()}
       </div>
     </React.Fragment>
     )

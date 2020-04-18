@@ -11,4 +11,5 @@ json.properties do
     json.price_per_night property.price_per_night
     json.image_url property.image_url
   end
+
 end

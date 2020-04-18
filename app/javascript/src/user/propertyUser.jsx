@@ -12,8 +12,7 @@ class PropertyUser extends React.Component {
   }
 
   componentDidMount() {
-    this.currentUser();
-    fetch(`/api/users/${this.state.current_user}/properties`)
+    fetch(`/api/users/${this.props.username_id}/properties`)
       .then(response => response.json())
       .then(data => this.setState({ userProperties: data.properties }));
   }
