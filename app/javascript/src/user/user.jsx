@@ -21,6 +21,7 @@ class User extends React.Component {
   }
 
   componentDidMount()   {
+    console.log(this.props.username_id)
     fetch('/api/authenticated')
       .then(response => response.json())
       .then(data => this.setState({ current_user: data.username }));
