@@ -56,9 +56,15 @@ module Api
     end
 
     def index_by_user
-       @user_properties = Property.where(user_id: params[:user_id])
-       return render json: { error: 'not_found' }, status: :not_found if !@user_properties
-       render 'api/properties/user_properties', status: :ok
+      @user_properties = Property.where(user_id: params[:user_id])
+      return render json: { error: 'not_found' }, status: :not_found if !@user_properties
+      render 'api/properties/user_properties', status: :ok
+    end
+
+    def index_payments
+      @user_payments = Property.joins(:bookings).select(:title, :city, :country, :start_date, :end_date, :id)
+      @user_payments = @user_payments.where(user_id: params[:user_id])
+      render json: { user_payments: @user_payments  }
     end
 
     private

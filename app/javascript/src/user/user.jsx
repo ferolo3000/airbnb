@@ -6,6 +6,7 @@ import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import PropertyUser from "./propertyUser";
 import BookingUser from "./bookingUser";
 import Form from "./form";
+import Payments from "./payments"
 import Standard from "./standard"
 
 import "./user.scss"
@@ -36,7 +37,7 @@ class User extends React.Component {
         case 'bookings': return <BookingUser/>
         case 'properties' : return <PropertyUser/>
         case 'add_property': return <Form/>
-        case 'payments': return <Standard/>
+        case 'payments': return <Payments/>
         case 'standard': return <Standard/>
       }
   }

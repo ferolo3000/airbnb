@@ -1,8 +1,7 @@
 json.user_bookings do
   json.array! @user_bookings,
     :id,
-    :title,
-    :city,
-    :country,
-    :image_url
+    :start_date,
+    :end_date,
+    :property_id
 end

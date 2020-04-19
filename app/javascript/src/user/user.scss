@@ -1,3 +1,17 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#payments {
+
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+#header {
+  background-color: #FF5A5F;
+  color: #fff;  
+}
+
 .vertical-nav {
   background-color: #FF5A5F;
   margin-top: 55px;
@@ -64,4 +78,14 @@
 input.form-control::placeholder {
   font-style: italic;
   font-size: 12px;
+}
+
+//image_url
+.property-image {
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  @media (min-width: 768px) {
+    height: 400px;
+  }
 }

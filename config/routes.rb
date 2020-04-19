@@ -16,8 +16,10 @@ Rails.application.routes.draw do
 
     get '/properties/:id/bookings'        => 'bookings#get_property_bookings'
     get '/authenticated'                  => 'sessions#authenticated'
-    get '/users/:user_id/properties'     => 'properties#index_by_user'
-    get '/users/:user_id/bookings'       => 'bookings#index_by_user'
+    get '/users/:user_id/properties'      => 'properties#index_by_user'
+    get '/users/:user_id/payments'        => 'properties#index_payments'
+    #get '/users/:user_id/bookings'       => 'bookings#index_by_user'
+    get '/users/:user_id/bookings'        => 'bookings#index'
     get '/properties'                     => 'properties#index'
 
     post '/properties'                    => 'properties#create'

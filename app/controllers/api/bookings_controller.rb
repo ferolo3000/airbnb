@@ -25,9 +25,17 @@ module Api
     end
 
     def index_by_user
-       @user_bookings = Property.where(user_id: params[:user_id])
+       @user_bookings = Booking.where(user_id: params[:user_id])
        return render json: { error: 'not_found' }, status: :not_found if !@user_bookings
        render 'api/bookings/user_bookings', status: :ok
+    end
+
+    def index
+      @trips = Booking.joins(:property, :charges).select(:title, :currency, :city, :country, :amount, :complete, :start_date, :end_date, :id, :description, :image_url, :property_id)
+      @trips = @trips.where(user_id: params[:user_id])
+      charge = Charge.all
+      render json: { trips: @trips  }
+      #render 'api/bookings/show', status: :ok
     end
 
     def is_paid?
