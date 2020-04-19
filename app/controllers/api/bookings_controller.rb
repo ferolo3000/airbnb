@@ -24,6 +24,12 @@ module Api
       render 'api/bookings/index'
     end
 
+    def index_by_user
+       @user_bookings = Property.where(user_id: params[:user_id])
+       return render json: { error: 'not_found' }, status: :not_found if !@user_bookings
+       render 'api/bookings/user_bookings', status: :ok
+    end
+
     def is_paid?
       self.charges.pluck(:complete).include?(true)
     end

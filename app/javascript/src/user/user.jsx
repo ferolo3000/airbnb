@@ -52,8 +52,6 @@ class User extends React.Component {
  }
 
   render() {
-    console.log(this.state.current_user)
-
     return (
       <React.Fragment>
       <nav className="navbar navbar-expand sticky-top navbar-light bg-light">

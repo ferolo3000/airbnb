@@ -7,42 +7,54 @@ class PropertyUser extends React.Component {
     super(props)
     this.state = {
       current_user: '',
+      current_user_id:'',
       userProperties: [],
     }
   }
 
   componentDidMount() {
-    fetch(`/api/users/${this.props.username_id}/properties`)
-      .then(response => response.json())
-      .then(data => this.setState({ userProperties: data.properties }));
-      this.currentUser();
-  }
-
-  currentUser = () => {
     fetch('/api/authenticated')
       .then(response => response.json())
-      .then(data => this.setState({ current_user: data.username }));
+      .then(data => {this.setState({
+        current_user: data.username,
+        current_user_id: data.user_id, })
+        return fetch(`/api/users/${this.state.current_user_id}/properties`)
+        })
+        .then(response => response.json())
+        .then(data => this.setState({ userProperties: data.user_properties }))
   }
 
-  getProperty = (data) => {
-    this.setState({
-      userProperties: data.properties
+  handleEdit = (e) => {
+    e.preventDefault()
+    let id = e.target.parentNode.id
+
+    fetch(`/api/properties/${id}`)
+      .then(handleErrors)
+      .then(data => {
+        this.setState({
+            userProperties: data.properties
+          })
+      })
+  }
+
+  handleEdit = (e) => {
+    e.preventDefault()
+    const data = { username: 'example' };
+    fetch(`/api/properties/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
     })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
-
-  // handleEdit = (e) => {
-  //   e.preventDefault()
-  //   let id = e.target.parentNode.id
-  //
-  //   fetch(`/api/properties/${id}/edit`)
-  //     .then(handleErrors)
-  //     .then(data => {
-  //       this.getProperty(data);
-  //     })
-  // }
 
   render() {
-    console.log(this.props.username_id)
+  console.log(this.state.current_user_id)
   if (this.state.userProperties.length > 0) {
     return (
       <React.Fragment>

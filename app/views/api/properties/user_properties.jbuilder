@@ -1,8 +1,8 @@
 json.user_properties do
   json.array! @user_properties,
     :id,
-    :user,
     :title,
+    :property_type,
     :city,
     :country,
     :image_url

@@ -1,4 +1,4 @@
-// PropertyUser.jsx
+// BookingUser.jsx
 import React from 'react';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
@@ -7,31 +7,31 @@ class BookingUser extends React.Component {
     super(props)
     this.state = {
       current_user: '',
-      userProperties: [],
+      current_user_id:'',
+      userBookings: [],
     }
   }
 
   componentDidMount() {
-    this.currentUser();
-    fetch(`/api/users/${this.state.current_user}/bookings`)
-      .then(response => response.json())
-      .then(data => this.setState({ userProperties: data.properties }));
-  }
-
-  currentUser = () => {
     fetch('/api/authenticated')
       .then(response => response.json())
-      .then(data => this.setState({ current_user: data.username }));
+      .then(data => {this.setState({
+        current_user: data.username,
+        current_user_id: data.user_id, })
+        return fetch(`/api/users/${this.state.current_user_id}/bookings`)
+        })
+        .then(response => response.json())
+        .then(data => this.setState({ userBookings: data.user_bookings }))
   }
 
   render() {
-
-  if (this.state.userProperties.length > 0) {
+  console.log(this.state.current_user_id)
+  if (this.state.userBookings.length > 0) {
     return (
       <React.Fragment>
       <div>
         <div className="row">
-        {this.state.userProperties.map(property => {
+        {this.state.userBookings.map(property => {
           return (
             <div key={property.id} className="col-6 col-lg-4 mb-4 property">
               <a href={`/property/${property.id}`} className="text-body text-decoration-none">
@@ -39,9 +39,10 @@ class BookingUser extends React.Component {
               </a>
                 <p className="text-uppercase mb-0 text-secondary"><small><b>{property.city}</b></small></p>
                 <h6 className="mb-0">{property.title}</h6>
+                <p className="mb-0">Booked by: </p>
                 <p className="mb-0">Dates Booked: </p>
                 <p className="mb-0">Booking Status: </p>
-              <button className="btn btn-sm btn-primary mt-1" onSubmit={this.props.submitBooking}>Go to Payments</button>
+              <button className="btn btn-sm btn-primary mt-1">Pay</button>
             </div>
             )
           })}
