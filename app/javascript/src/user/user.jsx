@@ -6,7 +6,7 @@ import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import PropertyUser from "./propertyUser";
 import BookingUser from "./bookingUser";
 import Form from "./form";
-import Payments from "./payments"
+import Financials from "./financials"
 import Standard from "./standard"
 
 import "./user.scss"
@@ -37,7 +37,7 @@ class User extends React.Component {
         case 'bookings': return <BookingUser/>
         case 'properties' : return <PropertyUser/>
         case 'add_property': return <Form/>
-        case 'payments': return <Payments/>
+        case 'financials': return <Financials/>
         case 'standard': return <Standard/>
       }
   }
@@ -99,8 +99,8 @@ class User extends React.Component {
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link text-link" name="payments" onClick={this.handleClick.bind(this, 'payments')}>
-                Payments
+              <a href="#" className="nav-link text-link" name="financials" onClick={this.handleClick.bind(this, 'financials')}>
+                Financials
               </a>
             </li>
           </ul>

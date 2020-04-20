@@ -26,13 +26,10 @@ module Api
       end
     end
 
-    def update
-      @property = Property.find_by(id: params[:id])
-      if property.update(property_params)
-        render json: { success: true }, status: :ok
-      else
-        render json: { success: false }, status: :bad_request
-      end
+    def edit
+       @property = Property.find_by(id: params[:id])
+      return render json: { error: 'not_found' }, status: :not_found if !@property
+      render 'api/properties/edit', status: :ok
     end
 
     def destroy
@@ -61,10 +58,10 @@ module Api
       render 'api/properties/user_properties', status: :ok
     end
 
-    def index_payments
-      @user_payments = Property.joins(:bookings).select(:title, :city, :country, :start_date, :end_date, :id)
-      @user_payments = @user_payments.where(user_id: params[:user_id])
-      render json: { user_payments: @user_payments  }
+    def index_financials
+      @user_financials = Property.joins(bookings: [:charges]).select(:title, :amount, :complete, :city, :country, :start_date, :end_date, :id, :booking_id)
+      @user_financials = @user_financials.where(user_id: params[:user_id])
+      render json: { user_financials: @user_financials }
     end
 
     private

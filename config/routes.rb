@@ -17,10 +17,11 @@ Rails.application.routes.draw do
     get '/properties/:id/bookings'        => 'bookings#get_property_bookings'
     get '/authenticated'                  => 'sessions#authenticated'
     get '/users/:user_id/properties'      => 'properties#index_by_user'
-    get '/users/:user_id/payments'        => 'properties#index_payments'
+    get '/users/:user_id/financials'      => 'properties#index_financials'
     #get '/users/:user_id/bookings'       => 'bookings#index_by_user'
     get '/users/:user_id/bookings'        => 'bookings#index'
     get '/properties'                     => 'properties#index'
+    #put '/properties/:id'                 => 'properties#update'
 
     post '/properties'                    => 'properties#create'
     delete '/sessions'                    => 'sessions#destroy'

@@ -11,7 +11,9 @@ class PropertyUser extends React.Component {
       current_user: '',
       current_user_id:'',
       userProperties: [],
+      property: []
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -26,37 +28,50 @@ class PropertyUser extends React.Component {
         .then(data => this.setState({ userProperties: data.user_properties }))
   }
 
-  handleEdit = (e) => {
-    e.preventDefault()
-    let id = e.target.parentNode.id
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
 
-    fetch(`/api/properties/${id}`)
+  handleEdit = (e) => {
+    e.preventDefault();
+    let id = e.target.id
+    const data = {
+      title: property.title,
+      city: property.city,
+      country: property.country,
+    };
+
+    fetch(`/api/properties/${id}/edit`, safeCredentials({
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }))
       .then(handleErrors)
       .then(data => {
-        this.setState({
-            userProperties: data.properties
+        console.log(data.success)
+        if (data.success) {
+          this.setState({
+            title: '',
+            city: '',
+            country: '',
           })
+        }
+      })
+      .catch(error => {
+        this.setState({
+          error: 'Could not save.',
+        })
       })
   }
 
-  handleEdit = (e) => {
-    e.preventDefault()
-    const data = { username: 'example' };
-    fetch(`/api/properties/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
+  enableEdit(i){
+    this.setState({
+      [e.target.name]: e.target.value.editing=true,
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  }
+};
 
   render() {
-  console.log(this.state.current_user_id)
   if (this.state.userProperties.length > 0) {
     return (
       <React.Fragment>
@@ -69,12 +84,22 @@ class PropertyUser extends React.Component {
               <a href={`/property/${property.id}`} className="text-body text-decoration-none">
                 <div className="property-image mb-1 rounded" style={{ backgroundImage: `url(${property.image_url})`, height: 200 }} />
               </a>
-                <p className="text-uppercase mb-0 text-secondary"><small><b>{property.city}</b></small></p>
-                <h6 className="mb-0">{property.title}</h6>
-                <p className="mb-0">City: {property.city} </p>
-                <p className="mb-0">Country: {property.country} </p>
-                <p className="mb-0">Booking Status: {property.start_date} {property.end_date}</p>
-              <button className="btn btn-sm btn-success mt-1" onClick={this.handleEdit}>Edit</button>
+              <form className="form-horizontal">
+                <div className="form-group prop-data">
+                  <label className="content">Title: </label>
+                  <input readOnly name="title" type="text" value={property.title} onChange={this.handleChange} className="form-control-plaintext"/>
+                </div>
+                <div className="form-group prop-data">
+                  <label className="content">City: </label>
+                  <input readOnly name="city" type="text" value={property.city} onChange={this.handleChange} className="form-control-plaintext"/>
+                </div>
+                <div className="form-group prop-data mb-0">
+                  <label className="content">Country: </label>
+                  <input readOnly name="country" type="text" value={property.country} onChange={this.handleChange} className="form-control-plaintext"/>
+                </div>
+              </form>
+              <button className="btn btn-sm btn-primary mt-1" onClick={this.handleEdit} id={property.id}>Edit</button>
+              <button className="btn btn-sm btn-success mt-1 ml-2" onClick={this.handleEdit}>Save</button>
             </div>
             )
           })}

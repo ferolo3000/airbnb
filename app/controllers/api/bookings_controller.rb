@@ -33,7 +33,7 @@ module Api
     def index
       @trips = Booking.joins(:property, :charges).select(:title, :currency, :city, :country, :amount, :complete, :start_date, :end_date, :id, :description, :image_url, :property_id)
       @trips = @trips.where(user_id: params[:user_id])
-      charge = Charge.all
+      #charge = Charge.all
       render json: { trips: @trips  }
       #render 'api/bookings/show', status: :ok
     end

@@ -2,15 +2,47 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-#payments {
+//-----------financials
 
+#payments {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
 }
 
 #header {
   background-color: #FF5A5F;
-  color: #fff;  
+  color: #fff;
 }
+
+.stats {
+  color: #fff;
+}
+
+.card {
+      overflow: hidden;
+    }
+
+.card-block .rotate {
+  z-index: 8;
+  float: right;
+  height: 100%;
+}
+
+.card-block .rotate i {
+  color: rgba(20, 20, 20, 0.15);
+  position: absolute;
+  left: 0;
+  left: auto;
+  right: -10px;
+  bottom: 0;
+  display: block;
+  -webkit-transform: rotate(-44deg);
+  -moz-transform: rotate(-44deg);
+  -o-transform: rotate(-44deg);
+  -ms-transform: rotate(-44deg);
+  transform: rotate(-44deg);
+}
+
+//----------end financials
 
 .vertical-nav {
   background-color: #FF5A5F;
@@ -66,6 +98,11 @@ body {
 
 // form
 
+.prop-data{
+  display: flex;
+  margin: 0!important;
+}
+
 .label-form {
   font-size: 14px;
   color: #767676;
@@ -73,6 +110,12 @@ body {
 
 .form-group {
   margin-bottom: 5px;
+}
+
+.content {
+  margin-top: 7px;
+  margin-right: 5px;
+  margin-bottom: 0!important;
 }
 
 input.form-control::placeholder {

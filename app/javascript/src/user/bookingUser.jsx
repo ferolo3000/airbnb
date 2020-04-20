@@ -46,10 +46,13 @@ class BookingUser extends React.Component {
                 <p className="mb-0">City: {property.city}</p>
                 <p className="mb-0">Country: {property.country}</p>
                {(property.complete !== 0 ?
-                  <p className="mb-0">Status: Paid</p> :
-                   <p className="mb-0">Status: Missing Payment</p>
+                  <p className="mb-0">Status: <span className="text-success">Paid</span></p> :
+                   <p className="mb-0">Status: <span className="text-danger">Pending</span></p>
                 )}
-              <button className="btn btn-sm btn-primary mt-1">Pay</button>
+                {(property.complete !== 0 ?
+                   null :
+                    <button className="btn btn-sm btn-primary mt-1">Pay</button>
+                 )}
             </div>
             )
           })}
