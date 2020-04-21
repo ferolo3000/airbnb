@@ -83,20 +83,22 @@ class Financials extends React.Component {
                 </div>
               </div>
             </div>
-            <table id='payments' className="table table-hover">
-               <tbody>
-                <tr id="header">
-                  <th>TITLE</th>
-                  <th>CITY</th>
-                  <th>COUNTRY</th>
-                  <th>AMOUNT</th>
-                  <th>PAYMENT</th>
-                  <th>START DATE</th>
-                  <th>END DATE</th>
-                </tr>
-                  {this.renderTableData()}
-               </tbody>
-            </table>
+            <div>
+              <table id='payments' className="table table-hover">
+                 <tbody>
+                  <tr id="header">
+                    <th>TITLE</th>
+                    <th>CITY</th>
+                    <th>COUNTRY</th>
+                    <th>AMOUNT</th>
+                    <th>PAYMENT</th>
+                    <th>START DATE</th>
+                    <th>END DATE</th>
+                  </tr>
+                    {this.renderTableData()}
+                 </tbody>
+              </table>
+            </div>
          </div>
       </React.Fragment>
     )
