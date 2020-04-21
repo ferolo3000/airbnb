@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     #get '/users/:user_id/bookings'       => 'bookings#index_by_user'
     get '/users/:user_id/bookings'        => 'bookings#index'
     get '/properties'                     => 'properties#index'
-    #put '/properties/:id'                 => 'properties#update'
+    put '/properties/:id'                 => 'properties#update'
 
     post '/properties'                    => 'properties#create'
     delete '/sessions'                    => 'sessions#destroy'
