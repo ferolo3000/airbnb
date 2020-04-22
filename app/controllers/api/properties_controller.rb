@@ -29,7 +29,13 @@ module Api
     def update
        @property = Property.find_by(id: params[:id])
       return render json: { error: 'not_found' }, status: :not_found if !@property
-      render 'api/properties/edit', status: :ok
+      render 'api/properties/update', status: :ok
+    end
+
+    def update
+      property = Property.find(params[:id])
+      property.update_attributes(property_params)
+      render json: property
     end
 
     def destroy
