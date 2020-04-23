@@ -71,7 +71,7 @@ class PropertyUser extends React.Component {
           )
       }
 
-  // if (this.state.property.properties > 0) {
+  if (this.state.properties.length > 0) {
     return (
       <React.Fragment>
       <div>
@@ -84,13 +84,13 @@ class PropertyUser extends React.Component {
       </div>
       </React.Fragment>
     )
-  // }
-  //
-  // return (
-  //     <React.Fragment>
-  //       <h3 className="text-center">Sorry {this.state.current_user}, you don't have any property</h3>
-  //     </React.Fragment>
-  //   )
+  }
+
+  return (
+      <React.Fragment>
+        <h3 className="text-center">Sorry {this.state.current_user}, you don't have any property</h3>
+      </React.Fragment>
+    )
 
   }
 

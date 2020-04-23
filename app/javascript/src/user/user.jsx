@@ -39,6 +39,7 @@ class User extends React.Component {
         case 'add_property': return <Form/>
         case 'financials': return <Financials/>
         case 'standard': return <Standard/>
+        default: return <h2 className="text-center">Welcome to Dashboard</h2>
       }
   }
 

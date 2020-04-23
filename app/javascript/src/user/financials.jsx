@@ -113,7 +113,7 @@ class Financials extends React.Component {
 
   return (
       <React.Fragment>
-        <h3 className="text-center">Sorry {this.state.current_user}, you don't have any property booked yet</h3>
+        <h3 className="text-center">Sorry {this.state.current_user}, but no one has reserved your property yet</h3>
       </React.Fragment>
     )
 
