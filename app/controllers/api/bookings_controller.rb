@@ -1,5 +1,6 @@
 module Api
   class BookingsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def create
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)

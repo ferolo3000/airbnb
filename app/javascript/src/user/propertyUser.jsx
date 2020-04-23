@@ -1,7 +1,7 @@
 // PropertyUser.jsx
 import React from 'react';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
-import Fruit from "./property"
+import Property from "./property"
 
 import "./user.scss"
 
@@ -12,11 +12,11 @@ class PropertyUser extends React.Component {
     this.state = {
       current_user: '',
       current_user_id:'',
-      fruits: []
+      properties: []
     }
 
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.updateFruit = this.updateFruit.bind(this)
+    this.updateProperty = this.updateProperty.bind(this)
   }
 
   componentDidMount() {
@@ -28,54 +28,58 @@ class PropertyUser extends React.Component {
         return fetch(`/api/users/${this.state.current_user_id}/properties`)
         })
         .then(response => response.json())
-        .then(data => this.setState({ fruits: data.user_properties }))
+        .then(data => this.setState({ properties: data.user_properties }))
   }
 
-  handleUpdate(fruit){
-    fetch(`/api/properties/${fruit.id}`,
+  handleUpdate(property){
+    fetch(`/api/properties/${property.id}`,
     {
       method: 'PUT',
-      body: JSON.stringify({fruit: fruit}),
+      body: JSON.stringify({property: property}),
       headers: {
         'Content-Type': 'application/json'
       }
     }).then((response) => {
-        this.updateFruit(fruit)
+        this.updateProperty(property)
       })
+      console.log(property.id)
   }
-  updateFruit(fruit){
-    let newFruits = this.state.fruits.filter((f) => f.id !== fruit.id)
-    newFruits.push(fruit)
+
+  updateProperty(property){
+    let newProperties = this.state.properties.filter((f) => f.id !== property.id)
+    newProperties.push(property)
     this.setState({
-      fruits: newFruits
+      properties: newProperties
     })
   }
 
   render() {
-      const AllFruits = (props) => {
+      const AllProperties = (props) => {
 
-        var fruits = this.state.fruits.map((fruit) => {
+        var properties = this.state.properties.map((property, index) => {
           return(
-            <div key={fruit.id}>
-             <Fruit fruit={fruit} handleUpdate={props.handleUpdate}/>
+            <div className="col-4" key={property.id}>
+             <Property property={property} handleUpdate={props.handleUpdate}/>
             </div>
           )
         })
 
         return(
             <React.Fragment>
-              {fruits}
+              {properties}
             </React.Fragment>
           )
       }
 
-  // if (this.state.property.fruits > 0) {
+  // if (this.state.property.properties > 0) {
     return (
       <React.Fragment>
       <div>
       <h5 className="text-secondary text-center mb-3">My Properties</h5>
         <div className="container">
-         <AllFruits fruits={this.state.fruits} handleUpdate={this.handleUpdate}/>
+          <div className="row">
+            <AllProperties properties={this.state.properties} handleUpdate={this.handleUpdate}/>
+          </div>
         </div>
       </div>
       </React.Fragment>

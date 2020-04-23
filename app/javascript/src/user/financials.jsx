@@ -1,6 +1,13 @@
 // PropertyUser.jsx
 import React from 'react';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
+import {loadStripe} from '@stripe/stripe-js';
+import {
+  CardElement,
+  Elements,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js';
 
 import "./user.scss"
 
@@ -106,7 +113,7 @@ class Financials extends React.Component {
 
   return (
       <React.Fragment>
-        <h3 className="text-center">Sorry {this.state.current_user}, you don't have any property</h3>
+        <h3 className="text-center">Sorry {this.state.current_user}, you don't have any property booked yet</h3>
       </React.Fragment>
     )
 

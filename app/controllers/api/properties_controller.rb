@@ -1,5 +1,7 @@
 module Api
   class PropertiesController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def index
       @properties = Property.order(created_at: :desc).page(params[:page]).per(6)
       return render json: { error: 'not_found' }, status: :not_found if !@properties
@@ -26,16 +28,24 @@ module Api
       end
     end
 
-    def update
-       @property = Property.find_by(id: params[:id])
-      return render json: { error: 'not_found' }, status: :not_found if !@property
-      render 'api/properties/update', status: :ok
-    end
+    # def update
+    #    @property = Property.find_by(id: params[:id])
+    #   return render json: { error: 'not_found' }, status: :not_found if !@property
+    #   render 'api/properties/update', status: :ok
+    # end
 
     def update
-      property = Property.find(params[:id])
+
+      property = Property.find_by(id: params[:id])
       property.update_attributes(property_params)
-      render json: property
+
+      if property.save
+        render json: property
+        #render 'api/properties/create', status: :ok
+      else
+        render json: { success: false }, status: :bad_request
+      end
+
     end
 
     def destroy
@@ -74,7 +84,7 @@ module Api
 
      def property_params
        params.require(:property).permit(:title, :description, :city, :country, :property_type, :price_per_night, :max_guests,
-          :bedrooms, :beds, :baths, :image)
+          :bedrooms, :beds, :baths, :image_url)
      end
   end
 end
