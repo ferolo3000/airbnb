@@ -64,9 +64,6 @@ class User extends React.Component {
               <a className="nav-link" href="/">Home</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href={`/users/${this.state.current_user}`}>User</a>
-            </li>
-            <li className="nav-item">
               <a className="nav-link" href="/login" onClick={this.handleLogout}>Log Out</a>
             </li>
           </ul>

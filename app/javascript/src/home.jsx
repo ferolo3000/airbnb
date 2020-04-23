@@ -52,15 +52,15 @@ class Home extends React.Component {
       .then(data => this.setState({ current_user: data.username }));
   }
 
-  handleLogout() {
-    fetch('/api/sessions', safeCredentials({
-      method: 'DELETE',
-    }))
-    .then(response => {
-      window.location = "/login";
-    })
-    .catch(error => console.log(error))
-  }
+  // handleLogout() {
+  //   fetch('/api/sessions', safeCredentials({
+  //     method: 'DELETE',
+  //   }))
+  //   .then(response => {
+  //     window.location = "/login";
+  //   })
+  //   .catch(error => console.log(error))
+  // }
 
   render () {
     const { properties, next_page, loading } = this.state;
@@ -77,7 +77,7 @@ class Home extends React.Component {
                 <a className="nav-link" href={`/users/${this.state.current_user}`}>User</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/login" onClick={this.handleLogout}>Log Out</a>
+                <a className="nav-link" href="/login">Log In</a>
               </li>
             </ul>
           </div>
