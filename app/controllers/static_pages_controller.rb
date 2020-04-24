@@ -23,4 +23,5 @@ class StaticPagesController < ApplicationController
     @data = { property_id: params[:id] }.to_json
     render 'success'
   end
+
 end

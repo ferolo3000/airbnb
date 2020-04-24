@@ -73,7 +73,7 @@ class User extends React.Component {
         <div className="vertical-nav" id="sidebar">
           <div className="py-4 px-3 mb-4 bg-light">
             <div className="media d-flex align-items-center">
-              <img src="https://img.icons8.com/ultraviolet/80/000000/user.png" width="65" className="mr-3 rounded-circle img-thumbnail shadow-sm" />
+              <img src="https://img.icons8.com/ios/50/000000/user-male-circle.png" width="65" className="mr-3 rounded-circle img-thumbnail shadow-sm" />
               <div className="media-body">
                 <h5>Hello {this.state.current_user}</h5>
               </div>
