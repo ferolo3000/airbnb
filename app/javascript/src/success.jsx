@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
-import './success.scss';
-
 class Success extends React.Component {
 
   render() {
