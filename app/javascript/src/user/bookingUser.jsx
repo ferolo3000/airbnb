@@ -83,11 +83,11 @@ class BookingUser extends React.Component {
                 <p className="mb-0">Dates Booked: {booking.start_date} to {booking.end_date}</p>
                 <p className="mb-0">City: {booking.city}</p>
                 <p className="mb-0">Country: {booking.country}</p>
-               {(booking.complete !== false ?
+               {(booking.complete !== 0 ?
                   <p className="mb-0">Status: <span className="text-success">Paid</span></p> :
                    <p className="mb-0">Status: <span className="text-danger">Pending</span></p>
                 )}
-                {(booking.complete !== false ?
+                {(booking.complete !== 0 ?
                    null :
                     <button className="btn btn-sm btn-primary mt-1" onClick={() => this.initiateStripeCheckout(booking.id)}>Pay</button>
                  )}
@@ -105,9 +105,7 @@ class BookingUser extends React.Component {
         <h3 className="text-center">Sorry {this.state.current_user}, you haven't book anything yet</h3>
       </React.Fragment>
     )
-
   }
-
 }
 
 export default BookingUser;
