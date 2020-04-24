@@ -84,7 +84,7 @@ class Financials extends React.Component {
                 </div>
                 <div className="card card-inverse stats mb-5">
                   <div className="card-body text-center bg-info">
-                    <h6 className="text-uppercase">Pending Payments</h6>
+                    <h6 className="text-uppercase">Total Payments</h6>
                     <p className="display-3">{count}</p>
                   </div>
                 </div>
