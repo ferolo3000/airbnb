@@ -61,8 +61,8 @@ class Financials extends React.Component {
    // }
 
   render() {
-    const missingPayments = this.state.userFinancials.filter(payment => payment.complete < 1)
-    const count = missingPayments.length
+    const compleatePayments = this.state.userFinancials.filter(payment => payment.complete === true)
+    const count = compleatePayments.length
   if (this.state.userFinancials.length > 0) {
     return (
       <React.Fragment>
@@ -84,7 +84,7 @@ class Financials extends React.Component {
                 </div>
                 <div className="card card-inverse stats mb-5">
                   <div className="card-body text-center bg-info">
-                    <h6 className="text-uppercase">Pending Payments</h6>
+                    <h6 className="text-uppercase">Total Payments</h6>
                     <p className="display-3">{count}</p>
                   </div>
                 </div>
